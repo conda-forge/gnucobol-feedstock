@@ -1,15 +1,32 @@
 #!/usr/bin/env bash
-# Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./build_aux
-set -exuo pipefail
-./configure \
-    --prefix=$PREFIX \
-    --disable-silent-rules \
-    --with-libiconv-prefix=$PREFIX \
-    --with-libintl-prefix=$PREFIX \
-    --with-json=json-c \
-    --with-xml2=libxml2 \
-    --with-curses=ncursesw \
-    --with-db=db
 
+set -exuo pipefail
+
+if [[ "$target_platform" == "win-64" ]];
+then
+    ./configure \
+        --prefix=$PREFIX \
+        --disable-silent-rules \
+        --with-libiconv-prefix=$PREFIX \
+        --with-libintl-prefix=$PREFIX \
+        --with-json=json-c \
+        --with-xml2=libxml2 \
+        --with-curses=pdcurses \
+        --with-math=mpir \
+        --with-db=db || (cat config.log; exit 1)
+    patch_libtool
+else
+    ./configure \
+        --prefix=$PREFIX \
+        --disable-silent-rules \
+        --with-libiconv-prefix=$PREFIX \
+        --with-libintl-prefix=$PREFIX \
+        --with-json=json-c \
+        --with-xml2=libxml2 \
+        --with-curses=ncursesw \
+        --with-math=gmp \
+        --with-db=db
+fi
+
+make -j${CPU_COUNT}
 make install

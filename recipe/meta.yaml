@@ -10,8 +10,7 @@ source:
   sha256: 3bb48af46ced4779facf41fdc2ee60e4ccb86eaa99d010b36685315df39c2ee2
 
 build:
-  number: 0
-  skip: True  # [win]
+  number: 1
 
 requirements:
   build:
@@ -21,11 +20,15 @@ requirements:
     - pkg-config
     - make
     - gettext-tools
+    - autotools_clang_conda  # [win]
   host:
-    - gmp
-    - json-c
+    - gmp  # [not win]
+    - mpir  # [win]
+    - json-c  # [not win]
+    - json-c *h9fec484_1  # [win]
     - libxml2
-    - ncurses
+    - ncurses  # [not win]
+    - pdcurses  # [win]
     - libdb
     - libintl-devel  # [not linux]
   run:
@@ -34,7 +37,8 @@ requirements:
 test:
   commands:
     - cobc --version
-    - {{ RECIPE_DIR }}/test.sh
+    - {{ RECIPE_DIR }}/test.sh  # [not win]
+    - {{ RECIPE_DIR }}/test.bat  # [win]
 
 about:
   home: https://www.gnu.org/software/gnucobol/
