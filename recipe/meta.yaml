@@ -25,7 +25,7 @@ requirements:
     - gmp  # [not win]
     - mpir  # [win]
     - json-c  # [not win]
-    - json-c *h9fec484_1  # [win]
+    - json-c =*=h9fec484_1  # [win]
     - libxml2
     - ncurses  # [not win]
     - pdcurses  # [win]
