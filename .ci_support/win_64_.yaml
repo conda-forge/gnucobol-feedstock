@@ -1,0 +1,12 @@
+c_compiler:
+- vs2019
+c_stdlib:
+- vs
+channel_sources:
+- https://repo.prefix.dev/test-pavel,conda-forge
+channel_targets:
+- conda-forge main
+libxml2:
+- '2'
+target_platform:
+- win-64
