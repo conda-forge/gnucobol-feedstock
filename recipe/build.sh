@@ -4,7 +4,7 @@ set -exuo pipefail
 
 if [[ "$target_platform" == "win-64" ]];
 then
-    export PKG_CONFIG_PATH=$PREFIX/Library/lib/pkgconfig
+    export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
     ./configure \
         --prefix=$PREFIX \
         --disable-silent-rules \
