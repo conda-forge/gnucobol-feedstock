@@ -39,7 +39,10 @@ requirements:
 tests:
   - script:
       - cobc --version
-      - ${{ RECIPE_DIR }}/test.sh
+      - bash test.sh
+    files:
+      recipe:
+        - test.sh
 
 about:
   summary: COBOL85-202x compiler supporting lots of dialect specific extensions
