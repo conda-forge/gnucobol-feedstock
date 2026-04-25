@@ -10,7 +10,7 @@ source:
   sha256: 3bb48af46ced4779facf41fdc2ee60e4ccb86eaa99d010b36685315df39c2ee2
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win]
 
 requirements:
@@ -24,7 +24,7 @@ requirements:
   host:
     - gmp
     - json-c
-    - libxml2
+    - libxml2-devel
     - ncurses
     - libdb
     - libintl-devel  # [not linux]
