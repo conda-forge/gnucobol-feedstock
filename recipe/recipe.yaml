@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  name: gnucobol
+  version: 3.2
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://ftp.gnu.org/gnu/${{ name }}/${{ name }}-${{ version }}.tar.xz
+  sha256: 3bb48af46ced4779facf41fdc2ee60e4ccb86eaa99d010b36685315df39c2ee2
+
+build:
+  number: 2
+  skip: win
+
+requirements:
+  build:
+    - if: unix
+      then: gnuconfig
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - pkg-config
+    - make
+    - gettext-tools
+  host:
+    - gmp
+    - json-c
+    - libxml2
+    - ncurses
+    - libdb
+    - if: not linux
+      then: libintl-devel
+  run:
+    - ${{ c_compiler }}_${{ target_platform }}
+
+tests:
+  - script:
+      - cobc --version
+      - bash test.sh
+    files:
+      recipe:
+        - test.sh
+
+about:
+  summary: COBOL85-202x compiler supporting lots of dialect specific extensions
+  license: GPL-3.0-or-later
+  license_file: COPYING
+  homepage: https://www.gnu.org/software/gnucobol/
+  documentation: https://gnucobol.sourceforge.io/guides.html
+
+extra:
+  recipe-maintainers:
+    - pavelzw
