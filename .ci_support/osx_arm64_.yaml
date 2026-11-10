@@ -15,7 +15,7 @@ channel_targets:
 gmp:
 - '6'
 json_c:
-- '0.18'
+- '0.19'
 libxml2:
 - '2.15'
 macos_machine:
